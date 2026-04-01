@@ -25,7 +25,7 @@ def solve():
     solution = backtrack(STATES, domain, NEIGHBORS, {})
 
     if solution:
-        print("✅ Solution Found:\n")
+        print("Solution Found:\n")
         for state in STATES:
             print(f"{state:12s} → {solution[state]}")
     else:
