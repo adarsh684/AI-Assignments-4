@@ -1,6 +1,6 @@
 #  AI Assignments 4 – Constraint Satisfaction Problems (CSP)
 
-This repository contains implementations of classic **Constraint Satisfaction Problems (CSP)** using a reusable backtracking solver in Python.
+This repository contains implementations of **Constraint Satisfaction Problems (CSP)** using a common reusable backtracking solver in Python.
 
 ---
 
