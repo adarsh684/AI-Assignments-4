@@ -51,7 +51,7 @@ This project demonstrates how a single CSP framework can be applied to solve mul
 CSP-based map coloring of Telangana districts:
 
 <p align="center">
-  <img src="images/telangana_csp_map.png" width="500"/>
+  <img src="telangana_csp_map.png" width="500"/>
 </p>
 
 ---
@@ -67,9 +67,8 @@ CSP-based map coloring of Telangana districts:
 
   T W O
 + T W O
---------
-  F O U R
-
+F O U R
+---
 
 - Approach:
 - Variables: Letters + carry variables
@@ -110,7 +109,7 @@ The core CSP solver is based on:
 
 ### 1. Clone the repository
 
-git clone https://github.com/<your-username>/AI-assignments-4.git
+git clone https://github.com/adarsh684/AI-assignments-4.git
 cd AI-assignments-4
 
 
