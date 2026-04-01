@@ -8,7 +8,7 @@ from csp import backtrack
 # load geojson file for plot
 print("Loading GeoJSON from file...")
 
-with open("telangana_district.geojson", "r", encoding="utf-8") as f:
+with open("telangana_docs/telangana_district.geojson", "r", encoding="utf-8") as f:
     geojson = json.load(f)
 
 features = geojson["features"]
@@ -126,5 +126,5 @@ legend_patches = [
 ax.legend(handles=legend_patches, loc="lower left")
 
 plt.tight_layout()
-plt.savefig("telangana_csp_map.png", dpi=160)
+plt.savefig("telangana_docs/telangana_csp_map.png")
 plt.show()
