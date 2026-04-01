@@ -22,7 +22,7 @@ Colors the 7 states/territories of Australia using 3 colors (Red, Green, Blue) s
 
 **Run:**
 ```bash
-python Australia-CSP.py
+python3 Australia-CSP.py
 ```
 
 **Output:**
@@ -43,17 +43,17 @@ Colors all 33 districts of Telangana using 4 colors, then renders the result as 
 
 **Requirements:**
 ```bash
-pip install matplotlib numpy
+pip3 install matplotlib numpy
 ```
 
 You also need the GeoJSON file at `telangana_docs/telangana_district.geojson`.
 
 **Run:**
 ```bash
-python Telangana-CSP.py
+python3 Telangana-CSP.py
 ```
 
-**Output:** A rendered PNG map saved to `telangana_docs/telangana_csp_map.png`.
+**Output:** A PNG map saved to `telangana_docs/telangana_csp_map.png`.
 
 CSP-based map coloring of Telangana districts:
 <p align="center">
@@ -68,7 +68,7 @@ Solves a 9×9 Sudoku puzzle by modelling each cell as a CSP variable with domain
 
 **Run:**
 ```bash
-python Sudoku-CSP.py
+python3 Sudoku-CSP.py
 ```
 
 **Output:**
@@ -103,7 +103,7 @@ Each letter maps to a unique digit (0–9), with leading digits non-zero. The so
 
 **Run:**
 ```bash
-python crypt-analysis-CSP.py
+python3 crypt-analysis-CSP.py
 ```
 
 **Output:**
@@ -122,13 +122,6 @@ Verification:
 
 ---
 
-Install all dependencies:
-```bash
-pip install matplotlib numpy
-```
-
----
-
 ## How It Works
 
 All problems follow the same pattern:
@@ -136,9 +129,9 @@ All problems follow the same pattern:
 1. **Variables** — the things to assign (states, cells, letters).
 2. **Domains** — the possible values for each variable.
 3. **Neighbors** — which variables are constrained with each other.
-4. **Backtracking** — the engine tries values one by one, pruning branches that violate constraints early via `is_consistent`, and uses MRV to pick the most constrained variable next.
+4. **Backtracking** — the function tries values one by one, pruning branches that violate constraints early via `is_consistent`, and uses MRV to pick the most constrained variable next.
    
 ## Clone the repository to run 
 
-**git clone https://github.com/adarsh684/AI-assignments-4.git**
+**git clone https://github.com/adarsh684/AI-assignments-4.git**  
 **cd AI-assignments-4**
