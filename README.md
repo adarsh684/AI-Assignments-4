@@ -4,111 +4,141 @@ This repository contains implementations of **Constraint Satisfaction Problems (
 
 ---
 
-##  Overview
+## Core — `csp.py`
 
-A **Constraint Satisfaction Problem (CSP)** is defined by:
-- **Variables**
-- **Domains** (possible values)
-- **Constraints** (rules restricting assignments)
+All problems share a common CSP engine that provides:
 
-This project demonstrates how a single CSP framework can be applied to solve multiple real-world problems.
-
----
-
-##  Implemented Problems
-
-###  1. Sudoku Solver
-- Solves a standard 9×9 Sudoku puzzle
-- Constraints:
-  - Each row, column, and 3×3 box must contain unique numbers (1–9)
-- Approach:
-  - Variables: Grid cells `(row, col)`
-  - Domains: `{1–9}`
-  - Constraints handled via neighbor relationships
+- **`is_consistent(var, value, assignment, neighbors)`** — checks whether assigning a value to a variable violates any constraint with already-assigned neighbors.
+- **`select_unassigned_variable(...)`** — implements the **MRV (Minimum Remaining Values)** heuristic, selecting the variable with the fewest legal values remaining.
+- **`backtrack(variables, domain, neighbors, assignment)`** — recursive backtracking search that returns a complete valid assignment, or `None` if unsolvable.
 
 ---
 
-###  2. Australia Map Coloring
-- Assign colors to regions such that no adjacent regions share the same color
-- Constraints:
-  - Neighboring states must have different colors
-- Colors used: Red, Green, Blue
+## Problems
+
+### 1. Australia Map Coloring — `Australia-CSP.py`
+
+Colors the 7 states/territories of Australia using 3 colors (Red, Green, Blue) such that no two adjacent regions share the same color.
+
+**Run:**
+```bash
+python Australia-CSP.py
+```
+
+**Output:**
+```
+Solution Found:
+
+WA           → Red
+NT           → Green
+SA           → Blue
+...
+```
 
 ---
 
-###  3. Telangana Map Coloring
-- Similar to Australia map coloring but applied to Telangana districts
-- Includes:
-  - Real geographic visualization using GeoJSON
-  - Matplotlib-based colored map output
-- Constraints:
-  - Adjacent districts must have different colors
+### 2. Telangana Map Coloring — `Telangana-CSP.py`
 
----
+Colors all 33 districts of Telangana using 4 colors, then renders the result as a geographic map using `matplotlib` and a GeoJSON boundary file.
 
-## Telangana Map Output
+**Requirements:**
+```bash
+pip install matplotlib numpy
+```
+
+You also need the GeoJSON file at `telangana_docs/telangana_district.geojson`.
+
+**Run:**
+```bash
+python Telangana-CSP.py
+```
+
+**Output:** A rendered PNG map saved to `telangana_docs/telangana_csp_map.png`.
 
 CSP-based map coloring of Telangana districts:
-
 <p align="center">
-  <img src="telangana_csp_map.png" width="500"/>
+  <img src="telangana_docs/telangana_csp_map.png" width="500"/>
 </p>
 
 ---
 
-###  4. Cryptarithm Solver (TWO + TWO = FOUR)
-- Solves a classic cryptarithmetic puzzle
-- Each letter represents a unique digit (0–9)
+### 3. Sudoku Solver — `Sudoku-CSP.py`
 
-#### Constraints:
-- All letters must have different digits
-- Leading digits cannot be zero
-- Arithmetic constraints with carry handling:
+Solves a 9×9 Sudoku puzzle by modelling each cell as a CSP variable with domain `[1–9]`, subject to row, column, and 3×3 box constraints.
 
-  T W O
-+ T W O
-F O U R
----
+**Run:**
+```bash
+python Sudoku-CSP.py
+```
 
-- Approach:
-- Variables: Letters + carry variables
-- Custom constraint function for arithmetic validation
+**Output:**
+```
+Unsolved Sudoku:
 
----
+5 3 . | . 7 . | . . .
+...
 
-##  CSP Framework
+Solved Sudoku:
 
-The core CSP solver is based on:
+5 3 4 | 6 7 8 | 9 1 2
+...
+```
 
-- **Backtracking Search**
-- **MRV (Minimum Remaining Values) heuristic**
-- **Consistency checking using neighbors**
-- **Custom constraint support (for cryptarithm)**
+To solve a different puzzle, edit the `board` list in `Sudoku-CSP.py` (use `0` for empty cells).
 
 ---
 
-## ▶️ How to Run
+### 4. Cryptarithmetic — `crypt-analysis-CSP.py`
 
-### 1. Clone the repository
+Solves the classic puzzle:
+
+```
+  TWO
++ TWO
+-----
+ FOUR
+```
+
+Each letter maps to a unique digit (0–9), with leading digits non-zero. The solver uses column-wise carry constraints in addition to the standard CSP engine.
+
+**Run:**
+```bash
+python crypt-analysis-CSP.py
+```
+
+**Output:**
+```
+Cryptarithmetic CSP
+Problem: TWO + TWO = FOUR
+
+Letter Assignments:
+ T = 7, W = 3, O = 4, F = 1, U = 4, R = 8
+
+Verification:
+ 734 + 734 = 1468
+```
+
+> Note: This file defines its own `backtrack` that uses the cryptarithmetic constraint on top of the base CSP engine.
+
+---
+
+Install all dependencies:
+```bash
+pip install matplotlib numpy
+```
+
+---
+
+## How It Works
+
+All problems follow the same pattern:
+
+1. **Variables** — the things to assign (states, cells, letters).
+2. **Domains** — the possible values for each variable.
+3. **Neighbors** — which variables are constrained with each other.
+4. **Backtracking** — the engine tries values one by one, pruning branches that violate constraints early via `is_consistent`, and uses MRV to pick the most constrained variable next.
+   
+## Clone the repository to run 
 
 **git clone https://github.com/adarsh684/AI-assignments-4.git**
 **cd AI-assignments-4**
-
-
-### 2. Running any file
-
-#### Australia Map:
-python3 Australia-CSP.py
-
-#### Telangana Map:
-python3 Telangana-CSP.py
-
-#### Sudoku:
-python3 sudoku-CSP.py
-
-#### Crypt Analysis Puzzle:
-python3 crypt-analysis-CSP.py
-
-#### Install required libraries:
-pip install matplotlib numpy
-
